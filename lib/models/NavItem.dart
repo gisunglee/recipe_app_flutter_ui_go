@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app_flutter_ui_go/screens/home/home_screen.dart';
+import 'package:recipe_app_flutter_ui_go/screens/profile/profile_screen.dart';
 
 
 class NavItem {
@@ -32,7 +34,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 1,
       icon: "assets/icons/home.svg",
-//      destination: HomeScreen(),
+      destination: HomeScreen(),
     ),
     NavItem(
       id: 2,
@@ -49,7 +51,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 5,
       icon: "assets/icons/user.svg",
-//      destination: ProfileScreen(),
+      destination: ProfileScreen(),
     ),
   ];
 }
