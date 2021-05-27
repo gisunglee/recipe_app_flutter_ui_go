@@ -1,105 +1,70 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipe_app_flutter_ui_go/constants.dart';
+import 'package:recipe_app_flutter_ui_go/screens/profile/components/info.dart';
 import 'package:recipe_app_flutter_ui_go/size_config.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
+
     return Column(
       children: <Widget>[
-        Info(),
+        Info(
+          image: "assets/images/pic.png",
+          name: "Jhon Doe",
+          email: "Jhondoe01@gmail.com",
+        ),
+        ProfileMenuItem(
+          iconSrc: "assets/icons/bookmark_fill.svg",
+          title: "Saved Recipes",
+          press: (){},
+        ),
       ],
     );
   }
 }
 
-class Info extends StatelessWidget {
-  const Info({
+class ProfileMenuItem extends StatelessWidget {
+  const ProfileMenuItem({
     Key key,
-    this.name,
-    this.email,
-    this.image,
+    this.iconSrc,
+    this.title,
+    this.press,
   }) : super(key: key);
-
-  final String name, email, image;
+  final String iconSrc, title;
+  final Function press;
 
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
-
-    return SizedBox(
-      height: defaultSize * 24, //240
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: CustomShape(),
-            child: Container(
-              height: defaultSize * 15, //n 150
-              color: kPrimaryColor,
+    return InkWell(
+      onTap: press,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: defaultSize * 2, vertical: defaultSize * 3),
+        child: Row(
+          children: <Widget>[
+            SvgPicture.asset(iconSrc),
+            SizedBox(width: defaultSize * 2),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: defaultSize * 1.6,
+                color: kTextLigntColor,
+              ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  height: defaultSize * 14, //140
-                  width: defaultSize * 14,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white,
-                      width: defaultSize * 0.8,
-                    ),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/images/pic.png"),
-                    ),
-                  ),
-                ),
-                Text(
-                  "Jhon Doe",
-                  style: TextStyle(
-                    fontSize: defaultSize * 2.2, //22
-                    color: kTextColor,
-                  ),
-                ),
-                SizedBox(
-                  height: defaultSize / 2,
-                ), //5
-                Text(
-                  "Jhondoe01@gmail.com",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF8492A2),
-                  ),
-                ),
-              ],
+            Spacer(),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: defaultSize * 1.6,
+              color: kTextLigntColor,
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
-  }
-}
-
-class CustomShape extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    double height = size.height;
-    double width = size.width;
-    path.lineTo(0, height - 100);
-    path.quadraticBezierTo(width / 2, height, width, height - 100);
-    path.lineTo(width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
   }
 }
