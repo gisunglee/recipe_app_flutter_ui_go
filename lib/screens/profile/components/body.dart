@@ -10,19 +10,37 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
 
-    return Column(
-      children: <Widget>[
-        Info(
-          image: "assets/images/pic.png",
-          name: "Jhon Doe",
-          email: "Jhondoe01@gmail.com",
-        ),
-        ProfileMenuItem(
-          iconSrc: "assets/icons/bookmark_fill.svg",
-          title: "Saved Recipes",
-          press: (){},
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Info(
+            image: "assets/images/pic.png",
+            name: "Jhon Doe",
+            email: "Jhondoe01@gmail.com",
+          ),
+          SizedBox(height: SizeConfig.defaultSize * 2), //20
+          ProfileMenuItem(
+            iconSrc: "assets/icons/bookmark_fill.svg",
+            title: "Saved Recipes",
+            press: (){},
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/chef_color.svg",
+            title: "Super Plan",
+            press: (){},
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/language.svg",
+            title: "Change Language",
+            press: (){},
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/info.svg",
+            title: "Help",
+            press: (){},
+          ),
+        ],
+      ),
     );
   }
 }
